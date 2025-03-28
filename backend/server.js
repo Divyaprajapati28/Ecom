@@ -8,14 +8,13 @@ import orderRoutes from "./routes/orderRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-import cors from "cors";
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
-app.use(cors());
+
 app.use(express.json()); // Parsing http request body
 
 app.use("/api/products", productRoutes);
