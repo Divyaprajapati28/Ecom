@@ -26,7 +26,8 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Lenis from '@studio-freight/lenis'
 
-import "./styles.scss"
+
+import "../src/styles.scss"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -38,7 +39,7 @@ const lenis = new Lenis({
     mouseMultiplier: 1,
   })
   
-function raf(time: Number) {
+function raf(time: number) {
     lenis.raf(time)
     requestAnimationFrame(raf)
 }
@@ -348,25 +349,25 @@ async function setupViewer(){
     })
 
     // CUSTOMIZE EVENT
-    document.querySelector('.btn-customize')?.addEventListener('click', () => {
-        exploreView.style.pointerEvents = "none"
-        canvasView.style.pointerEvents = "all"
-        canvasContainer.style.zIndex = "1"
-        document.body.style.overflowY = "hidden"
-        document.body.style.cursor = "grab"
-        sidebar.style.display = "none"
-        footerContainer.style.display = "flex"
-        configAnimation()
+    // document.querySelector('.btn-customize')?.addEventListener('click', () => {
+    //     exploreView.style.pointerEvents = "none"
+    //     canvasView.style.pointerEvents = "all"
+    //     canvasContainer.style.zIndex = "1"
+    //     document.body.style.overflowY = "hidden"
+    //     document.body.style.cursor = "grab"
+    //     sidebar.style.display = "none"
+    //     footerContainer.style.display = "flex"
+    //     configAnimation()
 
-        if (!musicPlay) {
-            audio.play()
-            audio.volume = 0.1
-            audio.loop = true
-            musicPlay = true
+    //     if (!musicPlay) {
+    //         audio.play()
+    //         audio.volume = 0.1
+    //         audio.loop = true
+    //         musicPlay = true
             
-        }
-        // customScrollingEnabled = false
-    })
+    //     }
+    //     // customScrollingEnabled = false
+    // })
     const tlExplore = gsap.timeline()
 
     function configAnimation(){
@@ -712,9 +713,9 @@ async function setupViewer(){
 
 
 
-// /////////////////////////////////////////////////////////////////////////
-// ///// BACKGROUND MUSIC
-// let firstPlay = true
+/////////////////////////////////////////////////////////////////////////
+///// BACKGROUND MUSIC
+// let firstPlay = true;
 // let audio = new Audio();
 // audio.src = './assets/sounds/music_loop.mp3'
 // let musicPlay = false
@@ -740,3 +741,15 @@ async function setupViewer(){
 
 setupViewer()
 
+const audio = new Audio('./assets/sounds/music_loop.mp3')
+audio.play()
+audio.volume = 0.1
+audio.loop = true
+audio.playbackRate = 0.5
+audio.muted = true
+audio.play()
+audio.muted = false
+audio.volume = 0.1
+audio.loop = true
+audio.muted = true
+audio.play()

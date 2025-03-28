@@ -31,6 +31,13 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 // Create a static folder
 const __dirname = path.resolve();
+app.use((req, res, next) => {
+  if (req.url.endsWith(".js")) {
+    res.setHeader("Content-Type", "application/javascript");
+  }
+  next();
+});
+
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 if (process.env.NODE_ENV === "production") {
