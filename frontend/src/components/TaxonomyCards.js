@@ -18,7 +18,7 @@ const TaxonomyCards = () => {
 
   const [displayedText, setDisplayedText] = useState("");
   const fullText =
-    "Trust us to be part of your precious moments and to deliver jewellery that you'll cherish forever.";
+    "Where every piece is crafted with love for the moments that matter most.";
 
   useEffect(() => {
     let index = 0;

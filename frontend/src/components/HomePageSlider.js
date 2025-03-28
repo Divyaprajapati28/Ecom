@@ -10,17 +10,19 @@ const HomePageSlider = () => {
     { id: 1, image: "/images/2.png" },
     { id: 2, image: "/images/second.png" },
     { id: 3, image: "/images/third.png" },
+    { id: 4, image: "/images/fourth.png" },
+    { id: 5, image: "/images/fifth.png" },
   ];
 
   return (
-    <Box position="relative" height="80vh" width="100%">
+    <Box position="relative" height="100%" width="100%">
       <Swiper
         modules={[Pagination, Autoplay]}
         slidesPerView={1}
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
-        style={{ height: "80vh" }}
+        style={{ height: "85vh" }}
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
@@ -28,7 +30,7 @@ const HomePageSlider = () => {
               as="img"
               src={slide.image}
               alt={`Slide ${slide.id}`}
-              objectFit="cover"
+              objectFit="fit"
               width="100%"
               height="100%"
             />

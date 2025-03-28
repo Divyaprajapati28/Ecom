@@ -76,6 +76,12 @@ const Header = () => {
         <HeaderMenuItem url="/aboutus" icon={HiInformationCircle}>
           About us
         </HeaderMenuItem>
+        <HeaderMenuItem url="/blog" icon={HiInformationCircle}>
+          Blog
+        </HeaderMenuItem>
+        <HeaderMenuItem url="/goldinvestment" icon={HiInformationCircle}>
+          Gold investment
+        </HeaderMenuItem>
         <HeaderMenuItem url="/cart" icon={HiShoppingBag}>
           Cart
         </HeaderMenuItem>

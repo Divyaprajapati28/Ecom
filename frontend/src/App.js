@@ -20,6 +20,8 @@ import UserListScreen from "./screens/UserListScreen";
 import WomanScreen from "./screens/WomanScreen";
 import MenScreen from "./screens/MenScreen";
 import AboutusScreen from "./screens/AboutusScreen";
+import Blog from "./screens/Blog";
+import GoldinvestmentScreen from "./screens/GoldinvestmentScreen";
 
 const App = () => {
   return (
@@ -49,6 +51,8 @@ const App = () => {
           <Route path="/admin/userlist" element={<UserListScreen />} />
           <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
           <Route path="/admin/productlist" element={<ProductListScreen />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/goldinvestment" element={<GoldinvestmentScreen />} />
           <Route path="/for-him" element={<MenScreen />} />
           <Route path="/for-her" element={<WomanScreen />} />
           <Route
