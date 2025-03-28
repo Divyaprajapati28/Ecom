@@ -15,14 +15,13 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.use(cors());
 app.use(express.json()); // Parsing http request body
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/uploads", uploadRoutes);
-
-app.use(cors({ origin: "http://localhost:3000" }));
 
 //paypal client ID Router
 // app.get("/api/config/paypal", (req, res) => {
