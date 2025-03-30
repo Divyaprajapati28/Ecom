@@ -7,7 +7,7 @@ import React from "react";
 
 const HomePageSlider = () => {
   const slides = [
-    { id: 1, image: "/images/2.png" },
+    { id: 1, image: "/images/1st.jpg" },
     { id: 2, image: "/images/second.png" },
     { id: 3, image: "/images/third.png" },
     { id: 4, image: "/images/fourth.png" },

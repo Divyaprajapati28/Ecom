@@ -38,7 +38,7 @@ const TaxonomyCards = () => {
         color="#9A6F5F"
         mb={6}
         fontStyle="italic"
-        border={"2px solid #9A6F5F"}
+        // border={"2px solid #9A6F5F"}
       >
         {displayedText}
       </Text>

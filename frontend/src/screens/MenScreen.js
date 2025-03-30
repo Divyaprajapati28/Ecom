@@ -26,26 +26,32 @@ const MenScreen = () => {
     dispatch(listProducts(activeFilter));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (products.length > 0 && !activeFilter) {
-      setActiveFilter(filterOptions["all"]); // Automatically select "All" or first available filter
-    }
+  const menProducts = useMemo(() => {
+    return products.filter((prod) => prod.category?.toLowerCase() === "men");
   }, [products]);
+
+  useEffect(() => {
+    if (menProducts.length > 0 && !activeFilter) {
+      setActiveFilter("All");
+    }
+  }, [menProducts]);
 
   const filterOptions = useMemo(() => {
     return [
       "All",
-      ...new Set(products.map((prod) => prod.filter?.toLowerCase())),
+      ...new Set(
+        menProducts
+          .map((prod) => prod.filter?.toLowerCase())
+          .filter((filter) => filter !== "women")
+      ),
     ];
-  }, [products]);
+  }, [menProducts]);
 
-  const filteredProducts = products
-    .filter((prod) => prod.category?.toLowerCase().includes("men"))
-    .filter((prod) =>
-      activeFilter
-        ? prod.filter?.toLowerCase().includes(activeFilter.toLowerCase())
-        : true
-    );
+  const filteredProducts = menProducts.filter((prod) =>
+    activeFilter && activeFilter !== "All"
+      ? prod.filter?.toLowerCase().includes(activeFilter.toLowerCase())
+      : true
+  );
 
   return (
     <>
@@ -62,12 +68,12 @@ const MenScreen = () => {
         }
       >
         <TabList display="flex" gap={4} flexWrap="wrap" mb={4}>
-          {filterOptions.map((filter, index) => (
+          {filterOptions.map((filter) => (
             <Tab
               key={filter}
               bg="gray.100"
               _selected={{
-                bg: "gray.400", // Darker color for active tab
+                bg: "gray.400",
                 color: "white",
                 fontWeight: "bold",
               }}
@@ -85,7 +91,7 @@ const MenScreen = () => {
         </TabList>
 
         <TabPanels>
-          {filterOptions.map((filter, index) => (
+          {filterOptions.map((filter) => (
             <TabPanel key={filter}>
               {loading ? (
                 <Loader />
@@ -100,17 +106,9 @@ const MenScreen = () => {
                   }}
                   gap="8"
                 >
-                  {filteredProducts
-                    .filter((prod) =>
-                      activeFilter
-                        ? prod.filter
-                            ?.toLowerCase()
-                            .includes(activeFilter.toLowerCase())
-                        : true
-                    )
-                    .map((prod) => (
-                      <ProductCard key={prod._id} product={prod} />
-                    ))}
+                  {filteredProducts.map((prod) => (
+                    <ProductCard key={prod._id} product={prod} />
+                  ))}
                 </Grid>
               )}
             </TabPanel>
