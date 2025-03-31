@@ -2,7 +2,7 @@ import { Box, Button, Heading } from "@chakra-ui/react";
 
 const JewelryViewer = () => {
   const handleOpenDemo = () => {
-    window.open("../dist/index.html", "_blank"); // Opens in a new tab
+    window.open("/dist/index.html", "_blank"); // Opens in a new tab
   };
 
   return (
