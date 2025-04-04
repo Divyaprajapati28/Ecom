@@ -11,14 +11,12 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import ProductCard from "../components/ProductCard";
 import HomePageSlider from "../components/HomePageSlider";
 import GenderCards from "../components/GenderCards";
 import TaxonomyCards from "../components/TaxonomyCards";
 import OfferCard from "../components/OfferCard";
 import JewelryViewer from "../components/JewelryViewer";
+import ReviewCard from "../components/ReviewCard";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -47,6 +45,7 @@ const HomeScreen = () => {
       </Text>
       <OfferCard />
       <JewelryViewer />
+      <ReviewCard />
     </>
   );
 };

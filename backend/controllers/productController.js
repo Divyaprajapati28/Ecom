@@ -117,9 +117,15 @@ const updateProduct = asyncHandler(async (req, res) => {
  * @access	private
  */
 const createProductReview = asyncHandler(async (req, res) => {
-  const { rating, comment } = req.body;
+  const { rating, comment, image } = req.body;
 
   const product = await Product.findById(req.params.id);
+  const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+
+  if (!imagePath) {
+    res.status(400);
+    throw new Error("Please upload an image");
+  }
 
   if (product) {
     const alreadyReviewed = product.reviews.find(
@@ -132,6 +138,7 @@ const createProductReview = asyncHandler(async (req, res) => {
     }
 
     const review = {
+      image: imagePath,
       name: req.user.name,
       rating: +rating,
       comment,

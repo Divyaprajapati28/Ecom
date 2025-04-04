@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const reviewSchema = mongoose.Schema(
   {
+    image: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,

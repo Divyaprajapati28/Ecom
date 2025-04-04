@@ -10,6 +10,14 @@ import {
   Select,
   Text,
   Textarea,
+  Input,
+  useDisclosure,
+  useToast,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,15 +31,19 @@ import Message from "../components/Message";
 import Rating from "../components/Rating";
 import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
 import ProductTable from "../components/ProductTable";
+import axios from "axios";
 
 const ProductScreen = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [preview, setPreview] = useState("");
 
   const [qty, setQty] = useState(1);
+  const [image, setImage] = useState("");
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState("");
+  const { id: productId } = useParams();
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, product, error } = productDetails;
@@ -43,11 +55,41 @@ const ProductScreen = () => {
   const { success: successProductReview, error: errorProductReview } =
     productReviewCreate;
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  // Handle review submission
+  const handleSubmit = async () => {
+    if (!comment || !image) {
+      alert("Please provide both a comment and an image.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("comment", comment);
+    formData.append("rating", rating);
+    formData.append("image", image); // image should be a File object
+
+    await axios.post(`/api/products/${productId}/reviews`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+  };
+
   useEffect(() => {
     if (successProductReview) {
       alert("Review submitted");
       setRating(1);
       setComment("");
+      setImage("");
+      setPreview("");
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
     }
     dispatch(listProductDetails(id));
@@ -59,7 +101,7 @@ const ProductScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProductReview(id, { rating, comment }));
+    dispatch(createProductReview(id, { rating, comment, image }));
   };
 
   return (
@@ -182,6 +224,16 @@ const ProductScreen = () => {
                 {product.reviews.map((review) => (
                   <Flex direction="column" key={review._id} mb="5">
                     <Flex justifyContent="space-between">
+                      <Flex alignItems="center">
+                        <Image
+                          src={review.image}
+                          alt={review.name}
+                          borderRadius="md"
+                          w="100%"
+                          h="200px"
+                          objectFit="cover"
+                        />
+                      </Flex>
                       <Text fontSize="lg">
                         <strong>{review.name}</strong>
                       </Text>
@@ -222,6 +274,27 @@ const ProductScreen = () => {
                     onChange={(e) => setComment(e.target.value)}
                   ></Textarea>
                 </FormControl>
+                <FormLabel mt={4}>Upload Image</FormLabel>
+                <Input
+                  type="file"
+                  onChange={(e) => setImage(e.target.files[0])}
+                  mb={4}
+                />
+
+                {/* Show preview if image is uploaded */}
+                {preview && (
+                  <Box mt={3}>
+                    <Image
+                      src={preview}
+                      alt="Preview"
+                      borderRadius="md"
+                      w="200px"
+                      h="200px"
+                      objectFit="cover"
+                      mb={3}
+                    />
+                  </Box>
+                )}
 
                 <Button colorScheme="teal" type="submit">
                   Post Review
