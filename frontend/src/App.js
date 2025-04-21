@@ -33,7 +33,7 @@ const App = () => {
         direction="column"
         py="6"
         px="6"
-        bgColor="#fce6e5"
+        bgColor="#fff7f7"
       >
         <Routes>
           <Route path="/" element={<HomeScreen />} />

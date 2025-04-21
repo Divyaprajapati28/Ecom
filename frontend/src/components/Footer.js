@@ -18,7 +18,13 @@ const Footer = () => {
     >
       <Grid templateColumns="repeat(4, 1fr)">
         <Image src="images/logo.png" alt="logo" h="100px" />
-        <Text>Terms & Conditions</Text>
+        <Flex direction="column" gap={2}>
+          <Text>Terms & Conditions</Text>
+          <Text>Privacy Policy</Text>
+          <Text>Return & Exchange Policy</Text>
+          <Text>Shipping & Delivery</Text>
+          <Text>FAQs</Text>
+        </Flex>
         <Flex direction="column">
           <Text size="lg" fontWeight="bold" mb={2}>
             Contact Us

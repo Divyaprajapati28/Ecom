@@ -45,6 +45,15 @@ const HomeScreen = () => {
       </Text>
       <OfferCard />
       <JewelryViewer />
+      <Text
+        fontSize="4xl"
+        fontWeight="bold"
+        color="#52322b"
+        textAlign="center"
+        mt="8"
+      >
+        Reviews
+      </Text>
       <ReviewCard />
     </>
   );

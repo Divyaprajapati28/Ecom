@@ -82,7 +82,15 @@ const ReviewCard = () => {
                     />
                   ))}
               </HStack>
-              <Text fontSize="sm" color="gray.600">
+              <Text
+                fontSize="sm"
+                color="gray.600"
+                fontWeight="bold"
+                noOfLines={4}
+                overflow="hidden"
+                textOverflow="ellipsis"
+                whiteSpace="normal"
+              >
                 {review.comment}
               </Text>
             </VStack>

@@ -49,7 +49,7 @@ const MenScreen = () => {
 
   const filteredProducts = menProducts.filter((prod) =>
     activeFilter && activeFilter !== "All"
-      ? prod.filter?.toLowerCase().includes(activeFilter.toLowerCase())
+      ? prod.filter?.toLowerCase() === activeFilter.toLowerCase()
       : true
   );
 

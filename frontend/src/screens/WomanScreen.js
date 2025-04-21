@@ -33,10 +33,18 @@ const WomanScreen = () => {
   }, [products]);
 
   const filterOptions = useMemo(() => {
-    return [
-      "All",
-      ...new Set(products.map((prod) => prod.filter?.toLowerCase())),
-    ];
+    const womanProducts = products.filter((prod) =>
+      prod.category?.toLowerCase().includes("woman")
+    );
+
+    const uniqueFilters = new Set();
+
+    womanProducts.forEach((prod) => {
+      const filterValue = prod.filter?.toLowerCase();
+      if (filterValue) uniqueFilters.add(filterValue);
+    });
+
+    return ["All", ...Array.from(uniqueFilters)];
   }, [products]);
 
   const filteredProducts = products
@@ -103,9 +111,8 @@ const WomanScreen = () => {
                   {filteredProducts
                     .filter((prod) =>
                       activeFilter
-                        ? prod.filter
-                            ?.toLowerCase()
-                            .includes(activeFilter.toLowerCase())
+                        ? prod.filter?.toLowerCase() ===
+                          activeFilter.toLowerCase()
                         : true
                     )
                     .map((prod) => (

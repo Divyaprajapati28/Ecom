@@ -23,7 +23,7 @@ const GoldinvestmentScreen = () => {
         Invest in Gold, Invest in Your Future
       </Text>
       <Flex direction="column" align="center">
-        <Image src="/assets/images/gold-investment.jpg" alt="Gold Jewelry" />
+        <Image src="/images/gold_gold.png" alt="Gold Jewelry" />
         <Text fontSize="md" mt={4}>
           Gold has been a symbol of wealth, security, and prosperity for
           centuries. Whether you’re buying gold jewelry for its beauty or as a
